@@ -1300,6 +1300,81 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Mobile hero section optimization for cat background visibility */
+  .hero-section {
+    min-height: 100vh;
+    height: 100vh; /* Force exact viewport height */
+    display: flex;
+    align-items: flex-start; /* Align content to top */
+    justify-content: center;
+    padding-top: 80px; /* Space for navbar */
+  }
+  
+  .hero-background {
+    background-position: center bottom; /* Show cat at bottom */
+    background-size: cover;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(10, 10, 10, 0.7); /* Semi-transparent background */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: var(--spacing-md);
+    margin: 20px var(--spacing-sm) auto var(--spacing-sm);
+    max-width: 90%;
+    text-align: center;
+  }
+  
+  /* Make hero text smaller on mobile */
+  .hero-text {
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .hero-logo img {
+    height: 60px; /* Smaller logo */
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+  }
+  
+  .hero-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .stat-item {
+    padding: var(--spacing-xs);
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
+  }
+  
+  .stat-value {
+    font-size: 0.9rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: center;
+  }
+  
+  .btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  /* Navigation styles */
   .nav-menu {
     position: fixed;
     top: 70px;
@@ -1334,18 +1409,11 @@ body {
     transform: rotate(-45deg) translate(7px, -6px);
   }
   
-  .hero-content {
-    margin-top: 80px; /* Increased margin for mobile */
-    padding: var(--spacing-lg);
-  }
+  /* Other mobile optimizations */
   
-  .hero-title {
-    font-size: clamp(2rem, 8vw, 4rem);
-    line-height: 1.3;
-  }
-  
-  .hero-stats {
-    grid-template-columns: 1fr;
+  /* Hide scroll indicator on mobile */
+  .scroll-indicator {
+    display: none;
   }
   
   .hero-actions {
@@ -1526,3 +1594,4 @@ body {
     display: none;
   }
 }
+
