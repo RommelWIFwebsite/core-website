@@ -21,6 +21,7 @@
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="terminal.js" as="script">
+    <link rel="preload" href="cursor.js" as="script">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
@@ -88,17 +89,17 @@
     <main class="main-content">
         <!-- Hero Section -->
         <section id="home" class="hero-section">
-            <div class="hero-background">
+            <div class="hero-background scroll-parallax" data-parallax-speed="0.5">
             </div>
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="hero-logo">
+                    <div class="hero-logo scroll-fade">
                         <img src="blue core logo transparent.svg" alt="CORE Logo">
                     </div>
-                    <p class="hero-subtitle">
-                        Here before time had a name. Not created, just remembered
+                    <p class="hero-subtitle typewriter-text scroll-fade">
+                        <span id="typewriter-content">Here before time had a name. Not created, just remembered</span>
                     </p>
-                    <div class="hero-stats">
+                    <div class="hero-stats scroll-fade">
                         <div class="stat-item">
                             <span class="stat-label">NETWORK</span>
                             <span class="stat-value">SOLANA</span>
@@ -113,7 +114,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-actions">
+                <div class="hero-actions scroll-fade">
                     <button class="btn btn-primary" onclick="scrollToSection('terminal')">
                         ACCESS TERMINAL
                         <span class="btn-arrow">→</span>
@@ -124,7 +125,7 @@
                     </button>
                 </div>
             </div>
-            <div class="scroll-indicator">
+            <div class="scroll-indicator scroll-fade">
                 <div class="scroll-arrow"></div>
                 <span class="scroll-text">SCROLL TO EXPLORE</span>
             </div>
@@ -132,8 +133,8 @@
 
         <!-- Terminal Section -->
         <section id="terminal" class="terminal-section">
-            <div class="terminal-container">
-                <div class="terminal-header">
+            <div class="terminal-container scroll-fade">
+                <div class="terminal-header scroll-fade">
                     <div class="terminal-controls">
                         <span class="control close"></span>
                         <span class="control minimize"></span>
@@ -145,7 +146,7 @@
                         <span>CONNECTED</span>
                     </div>
                 </div>
-                <div class="terminal-body" id="terminal-body">
+                <div class="terminal-body" id="terminal-body" class="scroll-fade">
                     <div class="terminal-line">
                         <span class="prompt">core@blockchain:~$</span>
                         <span class="command">welcome</span>
@@ -154,7 +155,7 @@
                         <div class="output-line">Welcome to CORE Terminal</div>
                         <div class="output-line">Type 'help' for available commands</div>
                         <div class="output-line">Type 'about' to learn about the core</div>
-                        <div class="output-line ascii-art">
+                        <div class="output-line ascii-art scroll-fade">
                             <pre>
     ██████╗ ██████╗ ██████╗ ███████╗
    ██╔════╝██╔═══██╗██╔══██╗██╔════╝
@@ -165,10 +166,9 @@
                             </pre>
                         </div>
                     </div>
-                    <div class="terminal-input-line">
+                    <div class="terminal-input-line scroll-fade">
                         <span class="prompt">core@blockchain:~$</span>
                         <input type="text" class="terminal-input" id="terminal-input" placeholder="Enter command..." autocomplete="off">
-                        <span class="cursor"></span>
                     </div>
                 </div>
             </div>
@@ -177,12 +177,12 @@
         <!-- About Section -->
         <section id="about" class="about-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header scroll-fade">
                     <h2 class="section-title">THE PHILOSOPHY</h2>
                     <p class="section-subtitle">Understanding the essence that connects everything</p>
                 </div>
-                <div class="about-grid">
-                    <div class="about-card" data-reveal>
+                <div class="about-grid scroll-fade">
+                    <div class="about-card scroll-fade">
                         <div class="card-icon">◉</div>
                         <h3 class="card-title">ORIGIN</h3>
                         <p class="card-description">
@@ -190,7 +190,7 @@
                             that defines existence itself. $CORE represents this universal truth.
                         </p>
                     </div>
-                    <div class="about-card" data-reveal>
+                    <div class="about-card scroll-fade">
                         <div class="card-icon">♦</div>
                         <h3 class="card-title">GRAVITY</h3>
                         <p class="card-description">
@@ -198,7 +198,7 @@
                             transactions where love and trust move through corecore at the speed of light.
                         </p>
                     </div>
-                    <div class="about-card" data-reveal>
+                    <div class="about-card scroll-fade">
                         <div class="card-icon">∞</div>
                         <h3 class="card-title">FOREVER</h3>
                         <p class="card-description">
@@ -207,7 +207,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="philosophy-text" data-reveal>
+                <div class="philosophy-text scroll-fade">
                     <blockquote>
                         "Corecore resonates with the soul's frequency - when we tune in, 
                         we realize that everything is already connected."
@@ -219,53 +219,53 @@
         <!-- Tokenomics Section -->
         <section id="tokenomics" class="tokenomics-section">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header scroll-fade">
                     <h2 class="section-title">TOKENOMICS</h2>
                     <p class="section-subtitle">Tax structure and transaction mechanics</p>
                 </div>
                 <div class="tokenomics-grid">
-                    <div class="tokenomics-card" data-reveal>
-                        <div class="card-header">
+                    <div class="tokenomics-card scroll-fade">
+                        <div class="card-header scroll-fade">
                             <h3>TAX STRUCTURE</h3>
                             <div class="supply-number">0%</div>
                         </div>
-                        <div class="tax-breakdown">
-                            <div class="tax-item">
+                        <div class="tax-breakdown scroll-fade">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">🛒</div>
                                 <div class="tax-text">
                                     <span>Buy Tax</span>
                                     <span class="tax-value">0%</span>
                                 </div>
                             </div>
-                            <div class="tax-item">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">💰</div>
                                 <div class="tax-text">
                                     <span>Sell Tax</span>
                                     <span class="tax-value">0%</span>
                                 </div>
                             </div>
-                            <div class="tax-item">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">🔄</div>
                                 <div class="tax-text">
                                     <span>Transfer Tax</span>
                                     <span class="tax-value">0%</span>
                                 </div>
                             </div>
-                            <div class="tax-item">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">🔒</div>
                                 <div class="tax-text">
                                     <span>Liquidity Lock</span>
                                     <span class="tax-value">100%</span>
                                 </div>
                             </div>
-                            <div class="tax-item">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">⛽</div>
                                 <div class="tax-text">
                                     <span>Max Transaction</span>
                                     <span class="tax-value">No Limit</span>
                                 </div>
                             </div>
-                            <div class="tax-item">
+                            <div class="tax-item scroll-fade">
                                 <div class="tax-icon">👑</div>
                                 <div class="tax-text">
                                     <span>Ownership</span>
@@ -279,14 +279,14 @@
         </section>
 
         <!-- Roadmap Section -->
-        <section id="roadmap" class="roadmap-section">
+        <section id="roadmap" class="roadmap-section scroll-fade">
             <div class="container">
-                <div class="section-header">
+                <div class="section-header scroll-fade">
                     <h2 class="section-title">ROADMAP</h2>
                     <p class="section-subtitle">The journey to universal core adoption</p>
                 </div>
                 <div class="roadmap-timeline">
-                    <div class="timeline-item completed" data-reveal>
+                    <div class="timeline-item completed scroll-fade">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">Phase I</div>
@@ -296,7 +296,7 @@
                             <div class="timeline-status">COMPLETED</div>
                         </div>
                     </div>
-                    <div class="timeline-item active" data-reveal>
+                    <div class="timeline-item active scroll-fade">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">Phase II</div>
@@ -308,7 +308,7 @@
                             <div class="timeline-status">IN PROGRESS</div>
                         </div>
                     </div>
-                    <div class="timeline-item" data-reveal>
+                    <div class="timeline-item scroll-fade">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <div class="timeline-date">Phase III</div>
@@ -326,10 +326,10 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer scroll-fade">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
+            <div class="footer-content scroll-fade">
+                <div class="footer-main scroll-fade">
                     <div class="footer-logo">
                         <img src="blue core logo transparent.svg" alt="CORE Logo" class="footer-logo-img" style="height: 4em; margin-bottom: 1rem;">
                     </div>
@@ -337,14 +337,14 @@
                         The essence of everything, connecting all through blockchain technology.
                     </p>
                 </div>
-                <div class="footer-contract">
+                <div class="footer-contract scroll-fade">
                     <h4>Contract Address</h4>
                     <div class="contract-address" onclick="copyContractAddress()">
                         <span id="footer-contract">4FdojUmXeaFMBG6yUaoufAC5Bz7u9AwnSAMizkx5pump</span>
                         <span class="copy-icon">⧉</span>
                     </div>
                 </div>
-                <div class="footer-social">
+                <div class="footer-social scroll-fade">
                     <div class="social-links">
                         <a href="https://x.com/corecoreonsol" target="_blank" class="social-link" aria-label="Twitter">
                             <svg viewBox="0 0 24 24" fill="currentColor">
@@ -364,7 +364,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom scroll-fade">
                 <p>&copy; 2025 CORE. All rights reserved. | The essence of everything.</p>
             </div>
         </div>
@@ -373,5 +373,6 @@
     <!-- Scripts -->
     <script src="script.js"></script>
     <script src="terminal.js"></script>
+    <script src="cursor.js"></script>
 </body>
 </html>
