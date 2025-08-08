@@ -3,8 +3,8 @@
     padding: 0.5rem 0.2rem;
     margin-top: 0;
     max-width: 99vw;
-    background: rgba(10,10,10,0.55);
-    border-radius: 6px;
+    background: none;
+    border-radius: 0;
     min-width: 0;
   }
   .hero-logo img {
@@ -34,6 +34,28 @@
     height: 100%;
     opacity: 1;
     z-index: 0;
+  }
+  /* Desktop nav menu (always flex) */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    position: static;
+    width: auto;
+    height: auto;
+    background: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    transition: none;
+    z-index: auto;
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .nav-toggle {
+    z-index: 2100;
   }
 }
 /* ====================================================================
@@ -124,67 +146,73 @@
 }
 
 html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  font-family: var(--font-primary);
-  font-size: var(--font-size-base);
-  line-height: 1.6;
-  color: var(--color-text-primary);
-  background: var(--color-bg-primary);
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  cursor: none; /* Hide default cursor */
-}
-
-/* Force hide cursor on all elements */
-*, *::before, *::after {
-  cursor: none !important;
-}
-
-/* Ensure cursor is hidden on interactive elements */
-a, button, input, textarea, select, [role="button"], [tabindex] {
-  cursor: none !important;
-}
-
-/* Additional cursor hiding for webkit browsers */
-::-webkit-any-link {
-  cursor: none !important;
-}
-
-/* Override any hover states that might show cursor */
-*:hover, *:focus, *:active {
-  cursor: none !important;
-}
-
-/* Specific overrides for common elements */
-a:hover, a:focus, a:active,
-button:hover, button:focus, button:active,
-input:hover, input:focus, input:active,
-textarea:hover, textarea:focus, textarea:active,
-select:hover, select:focus, select:active,
-[role="button"]:hover, [role="button"]:focus, [role="button"]:active {
-  cursor: none !important;
-}
-
-/* Override any CSS frameworks or libraries */
-.btn:hover, .button:hover, .link:hover {
-  cursor: none !important;
-}
-
-/* Selection Styles */
-::selection {
-  background: var(--color-accent-primary);
-  color: var(--color-bg-primary);
-}
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 0.5rem 0.2rem;
+      margin-top: 0;
+      max-width: 99vw;
+      background: rgba(10, 10, 10, 0.45); /* more transparent for cat image */
+      border-radius: 0;
+      min-width: 0;
+    }
+    .hero-logo img {
+      height: 24px !important;
+      max-width: 60px;
+      margin-bottom: 0.2rem;
+    }
+    .hero-title {
+      font-size: 1rem;
+      padding: 0 0.1em;
+      max-width: 98vw;
+      line-height: 1.05;
+      word-break: break-word;
+      white-space: normal;
+      overflow-wrap: break-word;
+      text-overflow: initial;
+      margin-bottom: 0.5em;
+    }
+    .hero-subtitle {
+      font-size: 0.65rem;
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+    .hero-background {
+      background: url('corebanner2.png') center top/cover no-repeat !important;
+      min-height: 220px;
+      height: 220px;
+      opacity: 1 !important;
+      z-index: 0;
+      display: block;
+    }
+    .nav-menu {
+      position: fixed;
+      top: 70px;
+      left: -100%;
+      width: 100vw;
+      height: calc(100vh - 70px);
+      background: rgba(10, 10, 10, 0.97);
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+      transition: left 0.3s cubic-bezier(0.4,0,0.2,1), visibility 0.3s, opacity 0.3s;
+      z-index: 2000;
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+    }
+    .nav-menu.active {
+      left: 0 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      opacity: 1 !important;
+      display: flex !important;
+      z-index: 2000;
+    }
+    .nav-toggle {
+      z-index: 2100;
+    }
+  }
 
 ::-moz-selection {
   background: var(--color-accent-primary);
@@ -449,10 +477,24 @@ select:hover, select:focus, select:active,
   animation: rotate-slow 10s linear infinite;
 }
 
+/* Desktop nav menu (always flex) */
 .nav-menu {
   display: flex;
   align-items: center;
   gap: var(--spacing-xl);
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0;
+  transition: none;
+  z-index: auto;
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .nav-link {
@@ -2078,18 +2120,26 @@ body {
     position: fixed;
     top: 70px;
     left: -100%;
-    width: 100%;
+    width: 100vw;
     height: calc(100vh - 70px);
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.97);
     flex-direction: column;
     justify-content: flex-start;
-    padding: var(--spacing-xl);
-    transition: left var(--transition-normal);
+    align-items: flex-start;
+    padding: 2rem 1rem;
+    transition: left 0.3s cubic-bezier(0.4,0,0.2,1), visibility 0.3s, opacity 0.3s;
+    z-index: 2000;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
   }
-  
   .nav-menu.active {
-    left: 0;
+    left: 0 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    display: flex !important;
+    z-index: 2000;
   }
   
   .nav-toggle {
@@ -2320,14 +2370,40 @@ body {
 
 /* Medium small screens - better responsive behavior */
 @media (max-width: 800px) {
-  .about-grid {
-    grid-template-columns: 1fr !important;
-    gap: var(--spacing-md);
-    max-width: 500px;
-    margin: 0 auto var(--spacing-3xl) auto;
+  .hero-content {
+    padding: 0.5rem 0.2rem;
+    margin-top: 0;
+    max-width: 99vw;
+    background: none;
+    border-radius: 0;
+    min-width: 0;
   }
-  
-  .buy-steps-grid {
+  .hero-subtitle, .hero-content p {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    word-break: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+    text-align: center;
+    max-width: 98vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-background {
+    min-height: 220px;
+    height: 100vh !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    opacity: 1 !important;
+    z-index: 0;
+    display: block;
+  }
+  .hero-section {
+    min-height: 320px;
+    height: 100vh !important;
+    position: relative;
+    overflow: hidden;
+  }
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
   }
