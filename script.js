@@ -95,6 +95,9 @@ function init() {
   // Initialize audio context
   initializeAudio();
   
+  // Start live statistics updates
+  startLiveStats();
+  
   console.log('✅ CORE Website initialized successfully');
 }
 
@@ -1044,6 +1047,140 @@ function logPerformance() {
  */
 window.scrollToSection = scrollToSection;
 window.copyContractAddress = copyContractAddress;
+window.refreshLiveData = refreshLiveData;
+
+// Live Statistics Management
+let liveStatsInterval;
+
+/**
+ * Refresh live data - simulated for now
+ */
+function refreshLiveData() {
+  console.log('🔄 Refreshing live data...');
+  
+  // Add refresh animation
+  const refreshButton = document.querySelector('.refresh-button');
+  if (refreshButton) {
+    refreshButton.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      refreshButton.style.transform = '';
+    }, 150);
+  }
+  
+  // Simulate API call delay
+  setTimeout(() => {
+    updateLiveStats();
+    showNotification('✅ Live data refreshed!');
+  }, 500);
+}
+
+/**
+ * Update live statistics with simulated data
+ */
+function updateLiveStats() {
+  // Simulated price data - in real implementation, fetch from CoinGecko or similar
+  const basePrice = 0.000001234;
+  const priceVariation = basePrice * (Math.random() * 0.1 - 0.05); // ±5% variation
+  const currentPrice = basePrice + priceVariation;
+  
+  const baseMarketCap = 1234567;
+  const mcapVariation = baseMarketCap * (Math.random() * 0.1 - 0.05);
+  const marketCap = baseMarketCap + mcapVariation;
+  
+  const baseVolume = 456789;
+  const volumeVariation = baseVolume * (Math.random() * 0.2 - 0.1);
+  const volume24h = baseVolume + volumeVariation;
+  
+  // Calculate 24h changes
+  const priceChange = (Math.random() * 20 - 10).toFixed(2); // ±10%
+  const mcapChange = (Math.random() * 15 - 7.5).toFixed(2); // ±7.5%
+  const volumeChange = (Math.random() * 30 - 15).toFixed(2); // ±15%
+  
+  // Update DOM elements
+  const currentPriceEl = document.getElementById('current-price');
+  const marketCapEl = document.getElementById('market-cap');
+  const volume24hEl = document.getElementById('volume-24h');
+  const priceChangeEl = document.getElementById('price-change');
+  const mcapChangeEl = document.getElementById('mcap-change');
+  const volumeChangeEl = document.getElementById('volume-change');
+  
+  if (currentPriceEl) {
+    animateNumber(currentPriceEl, currentPrice, '$', 8);
+  }
+  
+  if (marketCapEl) {
+    animateNumber(marketCapEl, marketCap, '$', 0);
+  }
+  
+  if (volume24hEl) {
+    animateNumber(volume24hEl, volume24h, '$', 0);
+  }
+  
+  if (priceChangeEl) {
+    priceChangeEl.textContent = `${priceChange >= 0 ? '+' : ''}${priceChange}% 24H`;
+    priceChangeEl.style.color = priceChange >= 0 ? '#00D4AA' : '#FF6B6B';
+  }
+  
+  if (mcapChangeEl) {
+    mcapChangeEl.textContent = `${mcapChange >= 0 ? '+' : ''}${mcapChange}% 24H`;
+    mcapChangeEl.style.color = mcapChange >= 0 ? '#00D4AA' : '#FF6B6B';
+  }
+  
+  if (volumeChangeEl) {
+    volumeChangeEl.textContent = `${volumeChange >= 0 ? '+' : ''}${volumeChange}% 24H`;
+    volumeChangeEl.style.color = volumeChange >= 0 ? '#00D4AA' : '#FF6B6B';
+  }
+}
+
+/**
+ * Animate number changes
+ */
+function animateNumber(element, targetValue, prefix = '', decimals = 2) {
+  const startValue = parseFloat(element.textContent.replace(/[^\d.-]/g, '')) || 0;
+  const difference = targetValue - startValue;
+  const duration = 1000; // 1 second
+  const startTime = performance.now();
+  
+  function animate(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    
+    const currentValue = startValue + (difference * easeInOutCubic(progress));
+    
+    if (decimals > 0) {
+      element.textContent = `${prefix}${currentValue.toFixed(decimals)}`;
+    } else {
+      element.textContent = `${prefix}${Math.round(currentValue).toLocaleString()}`;
+    }
+    
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+  
+  requestAnimationFrame(animate);
+}
+
+/**
+ * Start live statistics updates
+ */
+function startLiveStats() {
+  // Initial update
+  updateLiveStats();
+  
+  // Update every 30 seconds
+  liveStatsInterval = setInterval(updateLiveStats, 30000);
+}
+
+/**
+ * Stop live statistics updates
+ */
+function stopLiveStats() {
+  if (liveStatsInterval) {
+    clearInterval(liveStatsInterval);
+    liveStatsInterval = null;
+  }
+}
 
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {

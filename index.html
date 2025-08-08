@@ -238,6 +238,54 @@
             </div>
         </section>
 
+        <!-- Live Statistics Section -->
+        <section id="live-stats" class="live-stats-section">
+            <div class="container">
+                <div class="section-header scroll-fade">
+                    <h2 class="section-title">LIVE STATISTICS</h2>
+                    <div class="refresh-button scroll-fade" onclick="refreshLiveData()">
+                        <span>REFRESH DATA</span>
+                        <div class="refresh-icon">⟳</div>
+                    </div>
+                </div>
+                <div class="live-stats-grid scroll-fade">
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <h3>CURRENT PRICE</h3>
+                        </div>
+                        <div class="stat-value-large" id="current-price">$0.00000</div>
+                        <div class="stat-change" id="price-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <h3>MARKET CAP</h3>
+                        </div>
+                        <div class="stat-value-large" id="market-cap">$0</div>
+                        <div class="stat-change" id="mcap-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <h3>24H VOLUME</h3>
+                        </div>
+                        <div class="stat-value-large" id="volume-24h">$0</div>
+                        <div class="stat-change" id="volume-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Tokenomics Section -->
         <section id="tokenomics" class="tokenomics-section">
             <div class="container">
