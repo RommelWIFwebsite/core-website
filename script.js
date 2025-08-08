@@ -37,6 +37,8 @@ const state = {
   matrixDrops: [],
   isScrolling: false,
   lastScrollTop: 0,
+  scrollDirection: 'up',
+  navbarVisible: true,
   soundContext: null
 };
 
@@ -76,14 +78,19 @@ function init() {
   // Start loading sequence
   startLoadingSequence();
   
+  // Initialize navbar
+  initializeNavbar();
+  
+  // Initialize typewriter effect
+  initializeTypewriter();
+  
   // Initialize particles
   initializeParticles();
   
   // Initialize matrix rain
   initializeMatrixRain();
   
-  // Initialize reveal animations
-  initializeRevealAnimations();
+  // Note: Scroll reveal animations are now handled by scroll-animations.js
   
   // Initialize audio context
   initializeAudio();
@@ -104,7 +111,7 @@ function cacheElements() {
   elements.particlesContainer = document.querySelector('.particles-container');
   elements.totalSupply = document.getElementById('total-supply');
   elements.contractText = document.getElementById('contract-text');
-  elements.revealElements = document.querySelectorAll('[data-reveal]');
+  // Note: scroll animations are now handled by scroll-animations.js
 }
 
 /**
@@ -115,6 +122,26 @@ function setupEventListeners() {
   window.addEventListener('load', handleWindowLoad);
   window.addEventListener('scroll', throttle(handleScroll, 16));
   window.addEventListener('resize', throttle(handleResize, 100));
+  
+  // Mobile touch events for navbar
+  let touchStartY = 0;
+  let touchEndY = 0;
+  
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  
+  document.addEventListener('touchmove', (e) => {
+    touchEndY = e.changedTouches[0].screenY;
+    const touchDelta = touchStartY - touchEndY;
+    
+    // Handle touch scroll for navbar
+    if (Math.abs(touchDelta) > 50) {
+      const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      state.scrollDirection = touchDelta > 0 ? 'down' : 'up';
+      updateNavbarVisibility(currentScrollTop);
+    }
+  }, { passive: true });
   
   // Navigation events
   if (elements.navToggle) {
@@ -166,8 +193,7 @@ function handleScroll() {
   // Update active navigation link
   updateActiveNavLink();
   
-  // Trigger reveal animations
-  triggerRevealAnimations();
+  // Note: Scroll reveal animations are now handled by scroll-animations.js
   
   // Update parallax effects
   updateParallaxEffects(scrollTop);
@@ -285,12 +311,52 @@ function toggleMobileMenu() {
 function updateNavbarVisibility(scrollTop) {
   if (!elements.navbar) return;
   
-  if (scrollTop > state.lastScrollTop && scrollTop > 100) {
-    // Scrolling down
-    elements.navbar.classList.add('hidden');
+  const scrollDelta = scrollTop - state.lastScrollTop;
+  const scrollThreshold = 5; // Minimum scroll distance to trigger change
+  const hideThreshold = 80; // Minimum scroll position to start hiding
+  
+  // Determine scroll direction with better sensitivity
+  if (Math.abs(scrollDelta) > scrollThreshold) {
+    state.scrollDirection = scrollDelta > 0 ? 'down' : 'up';
+  }
+  
+  // Always show navbar at the top
+  if (scrollTop <= hideThreshold) {
+    showNavbar();
   } else {
-    // Scrolling up
+    // Hide navbar when scrolling down, show when scrolling up
+    if (state.scrollDirection === 'down') {
+      hideNavbar();
+    } else if (state.scrollDirection === 'up') {
+      showNavbar();
+    }
+  }
+  
+  // Add scrolled class for background change
+  if (scrollTop > 50) {
+    elements.navbar.classList.add('scrolled');
+  } else {
+    elements.navbar.classList.remove('scrolled');
+  }
+}
+
+/**
+ * Show navbar with smooth animation
+ */
+function showNavbar() {
+  if (!state.navbarVisible) {
     elements.navbar.classList.remove('hidden');
+    state.navbarVisible = true;
+  }
+}
+
+/**
+ * Hide navbar with smooth animation
+ */
+function hideNavbar() {
+  if (state.navbarVisible) {
+    elements.navbar.classList.add('hidden');
+    state.navbarVisible = false;
   }
 }
 
@@ -321,27 +387,23 @@ function updateActiveNavLink() {
 }
 
 /**
- * Trigger reveal animations
+ * Trigger reveal animations - Now handled by scroll-animations.js
+ * This function is kept for legacy compatibility but functionality moved to scroll-animations.js
  */
 function triggerRevealAnimations() {
-  elements.revealElements.forEach(element => {
-    const rect = element.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight * 0.8;
-    
-    if (isVisible && !element.classList.contains('revealed')) {
-      element.classList.add('revealed');
-    }
-  });
+  // Legacy function - functionality moved to scroll-animations.js for better performance
+  console.log('Reveal animations now handled by scroll-animations.js');
 }
 
 /**
- * Update parallax effects
+ * Update parallax effects - Enhanced with scroll-animations.js
  */
 function updateParallaxEffects(scrollTop) {
   const heroBackground = document.querySelector('.hero-background');
   if (heroBackground) {
     const parallaxSpeed = 0.5;
-    heroBackground.style.transform = `translateY(${scrollTop * parallaxSpeed}px)`;
+    const transform = `translate3d(0, ${scrollTop * parallaxSpeed}px, 0)`;
+    heroBackground.style.transform = transform;
   }
 }
 
@@ -632,24 +694,55 @@ function animateMatrixRain() {
 }
 
 /**
- * Initialize reveal animations
+ * Initialize reveal animations - Now handled by scroll-animations.js
+ * This function is kept for legacy compatibility
  */
 function initializeRevealAnimations() {
-  // Intersection Observer for better performance
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  // Legacy function - functionality moved to scroll-animations.js for better performance
+  console.log('Reveal animations now handled by scroll-animations.js with Intersection Observer');
+}
+
+/**
+ * Initialize navbar
+ */
+function initializeNavbar() {
+  // Ensure navbar starts visible
+  state.navbarVisible = true;
+  if (elements.navbar) {
+    elements.navbar.classList.remove('hidden');
+  }
+}
+
+/**
+ * Initialize typewriter effect
+ */
+function initializeTypewriter() {
+  const typewriterElement = document.getElementById('typewriter-content');
+  if (!typewriterElement) return;
   
-  elements.revealElements.forEach(element => {
-    observer.observe(element);
-  });
+  const text = typewriterElement.textContent;
+  typewriterElement.textContent = '';
+  typewriterElement.style.width = 'auto';
+  typewriterElement.style.borderRight = '2px solid var(--color-accent-primary)';
+  
+  let index = 0;
+  const speed = 50; // milliseconds per character
+  
+  function type() {
+    if (index < text.length) {
+      typewriterElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(type, speed);
+    } else {
+      // Remove cursor after typing is complete
+      setTimeout(() => {
+        typewriterElement.style.borderRight = 'none';
+      }, 1000);
+    }
+  }
+  
+  // Start typing after a delay
+  setTimeout(type, 1000);
 }
 
 /**
