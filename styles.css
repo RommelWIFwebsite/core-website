@@ -1590,7 +1590,7 @@ body {
   .hero-background {
     background-position: center center; /* Center the cat image */
     background-size: cover;
-    background-attachment: fixed; /* Keep background fixed on mobile */
+    background-attachment: scroll; /* Use scroll on mobile for better compatibility */
   }
   
   .hero-content {

@@ -146,6 +146,13 @@
   overflow: hidden !important;
 }
 
+/* Mobile fix for background attachment */
+@media (max-width: 768px) {
+  .hero-section {
+    background-attachment: scroll !important;
+  }
+}
+
 /* Hide the grid overlay to show banner */
 .grid-overlay {
   display: none !important;
@@ -226,6 +233,13 @@ body {
 
 /* Mobile responsive */
 @media (max-width: 768px) {
+  .hero-section {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    min-height: 100vh !important;
+  }
+  
   .hero-stats {
     grid-template-columns: 1fr !important;
     gap: 0.8rem !important;
