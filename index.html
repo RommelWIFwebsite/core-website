@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="$CORE - The essence of everything. Love moves through blockchain via corecore.">
+    <meta name="keywords" content="CORE, cryptocurrency, blockchain, DeFi, crypto token, everything, essence">
+    <meta name="author" content="CORE Team">
+    <meta property="og:title" content="$CORE - The Essence of Everything">
+    <meta property="og:description" content="Love moves through blockchain via corecore. Discover the philosophical core of cryptocurrency.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <title>$CORE - The Essence of Everything</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="favicon.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="favicon.jpg">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="terminal.js" as="script">
+    <link rel="preload" href="cursor.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="debug.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="core-symbol">◉</div>
+                <div class="loading-text">INITIALIZING CORE...</div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-status">NET_STATUS: CONNECTING...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="blue core logo transparent.svg" alt="CORE Logo" class="nav-logo-img">
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" data-section="home">HOME</a>
+                <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=4FdojUmXeaFMBG6yUaoufAC5Bz7u9AwnSAMizkx5pump" target="_blank" class="nav-link">BUY NOW</a>
+                <a href="#about" class="nav-link" data-section="about">ABOUT</a>
+                <a href="#how-to-buy" class="nav-link" data-section="how-to-buy">HOW TO BUY</a>
+                <a href="#roadmap" class="nav-link" data-section="roadmap">ROADMAP</a>
+            </div>
+            <div class="nav-social">
+                <a href="https://x.com/corecoreonsol" target="_blank" class="social-icon" aria-label="Twitter">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://t.me/CoreCommunityPortal" target="_blank" class="social-icon" aria-label="Telegram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                </a>
+                <a href="https://www.tiktok.com/@corehcore" target="_blank" class="social-icon" aria-label="TikTok">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.321 5.562a5.124 5.124 0 01-.443-.258 6.228 6.228 0 01-1.137-.966c-.849-.849-1.374-2.032-1.374-3.338h-2.289v14.554c0 .885-.335 1.691-.883 2.298-.548.608-1.295.953-2.117.953a3.344 3.344 0 01-3.344-3.344c0-1.848 1.496-3.344 3.344-3.344.348 0 .683.053 1 .154V9.742a6.205 6.205 0 00-1-.08c-3.422 0-6.199 2.777-6.199 6.199S7.656 22.06 11.078 22.06s6.199-2.777 6.199-6.199V9.098a8.987 8.987 0 005.043 1.541V7.786c-1.064 0-2.042-.417-2.757-1.096-.358-.34-.644-.748-.842-1.128z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-background scroll-parallax" data-parallax-speed="0.5">
+            </div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-logo scroll-fade">
+                        <img src="blue core logo transparent.svg" alt="CORE Logo">
+                    </div>
+                    <p class="hero-subtitle typewriter-text scroll-fade">
+                        <span id="typewriter-content">Here before time had a name. Not created, just remembered</span>
+                    </p>
+                    <div class="hero-stats scroll-fade">
+                        <div class="stat-item">
+                            <span class="stat-label">NETWORK</span>
+                            <span class="stat-value">SOLANA</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">STATUS</span>
+                            <span class="stat-value status-online">LIVE</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">SUPPLY</span>
+                            <span class="stat-value" id="total-supply">1,000,000,000</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-actions scroll-fade">
+                    <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=4FdojUmXeaFMBG6yUaoufAC5Bz7u9AwnSAMizkx5pump" target="_blank" class="btn btn-primary">
+                        BUY NOW
+                        <span class="btn-arrow">→</span>
+                    </a>
+                    <button class="btn btn-secondary" onclick="copyContractAddress()">
+                        <span id="contract-text">COPY CONTRACT</span>
+                        <span class="btn-arrow">⧉</span>
+                    </button>
+                </div>
+            </div>
+            <div class="scroll-indicator scroll-fade">
+                <div class="scroll-arrow"></div>
+                <span class="scroll-text">SCROLL TO EXPLORE</span>
+            </div>
+        </section>
+
+        <!-- Terminal Section -->
+        <section id="terminal" class="terminal-section">
+            <div class="terminal-container scroll-fade">
+                <div class="terminal-header scroll-fade">
+                    <div class="terminal-controls">
+                        <span class="control close"></span>
+                        <span class="control minimize"></span>
+                        <span class="control maximize"></span>
+                    </div>
+                    <div class="terminal-title">CORE_TERMINAL v2.1.0</div>
+                    <div class="terminal-status">
+                        <span class="status-dot"></span>
+                        <span>CONNECTED</span>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminal-body" class="scroll-fade">
+                    <div class="terminal-line">
+                        <span class="prompt">core@blockchain:~$</span>
+                        <span class="command">welcome</span>
+                    </div>
+                    <div class="terminal-output" id="terminal-output">
+                        <div class="output-line">Welcome to CORE Terminal</div>
+                        <div class="output-line">Type 'help' for available commands</div>
+                        <div class="output-line">Type 'about' to learn about the core</div>
+                        <div class="output-line ascii-art scroll-fade">
+                            <pre>
+    ██████╗ ██████╗ ██████╗ ███████╗
+   ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+   ██║     ██║   ██║██████╔╝█████╗  
+   ██║     ██║   ██║██╔══██╗██╔══╝  
+   ╚██████╗╚██████╔╝██║  ██║███████╗
+    ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="terminal-input-line scroll-fade">
+                        <span class="prompt">core@blockchain:~$</span>
+                        <input type="text" class="terminal-input" id="terminal-input" placeholder="Enter command..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="stars-background"></div>
+            <div class="container">
+                <div class="section-header scroll-fade">
+                    <h2 class="section-title">THE PHILOSOPHY</h2>
+                    <p class="section-subtitle">Understanding the essence that connects everything</p>
+                </div>
+                <div class="about-grid scroll-fade">
+                    <div class="about-card scroll-fade">
+                        <div class="card-icon">
+                            <i data-lucide="circle-dot"></i>
+                        </div>
+                        <h3 class="card-title">ORIGIN</h3>
+                        <p class="card-description">
+                            In every coin, person, and place lies a core - the fundamental essence 
+                            that defines existence itself. $CORE represents this universal truth.
+                        </p>
+                    </div>
+                    <div class="about-card scroll-fade">
+                        <div class="card-icon">
+                            <i data-lucide="zap"></i>
+                        </div>
+                        <h3 class="card-title">GRAVITY</h3>
+                        <p class="card-description">
+                            Through Solana's high-performance blockchain, we create lightning-fast 
+                            transactions where love and trust move through corecore at the speed of light.
+                        </p>
+                    </div>
+                    <div class="about-card scroll-fade">
+                        <div class="card-icon">
+                            <i data-lucide="infinity"></i>
+                        </div>
+                        <h3 class="card-title">FOREVER</h3>
+                        <p class="card-description">
+                            The core is infinite, connecting all things across time and space. 
+                            Our token represents this endless potential for connection.
+                        </p>
+                    </div>
+                </div>
+                <div class="philosophy-text scroll-fade">
+                    <blockquote>
+                        "Corecore resonates with the soul's frequency - when we tune in, 
+                        we realize that everything is already connected."
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Statistics Section -->
+        <section id="live-stats" class="live-stats-section">
+            <div class="stars-background"></div>
+            <div class="container">
+                <div class="section-header scroll-fade">
+                    <h2 class="section-title">LIVE STATISTICS</h2>
+                    <div class="refresh-button scroll-fade" onclick="refreshLiveData()">
+                        <span>REFRESH DATA</span>
+                        <div class="refresh-icon">
+                            <i data-lucide="refresh-cw"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="live-stats-grid scroll-fade">
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i data-lucide="dollar-sign"></i>
+                            </div>
+                            <h3>CURRENT PRICE</h3>
+                        </div>
+                        <div class="stat-value-large" id="current-price">$0.00000</div>
+                        <div class="stat-change" id="price-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i data-lucide="trending-up"></i>
+                            </div>
+                            <h3>MARKET CAP</h3>
+                        </div>
+                        <div class="stat-value-large" id="market-cap">$0</div>
+                        <div class="stat-change" id="mcap-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                    <div class="live-stat-card scroll-fade">
+                        <div class="stat-header">
+                            <div class="stat-icon">
+                                <i data-lucide="bar-chart-3"></i>
+                            </div>
+                            <h3>24H VOLUME</h3>
+                        </div>
+                        <div class="stat-value-large" id="volume-24h">$0</div>
+                        <div class="stat-change" id="volume-change">+0.00% 24H</div>
+                        <div class="live-indicator">
+                            <span class="pulse-dot"></span>
+                            <span>LIVE DATA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="last-updated scroll-fade">
+                    Last updated: Never
+                </div>
+            </div>
+        </section>
+
+        <!-- How To Buy Section -->
+        <section id="how-to-buy" class="how-to-buy-section">
+            <div class="stars-background"></div>
+            <div class="container">
+                <div class="section-header scroll-fade">
+                    <h2 class="section-title">HOW TO BUY $CORE</h2>
+                    <p class="section-subtitle">Your step-by-step guide to joining the Core universe</p>
+                </div>
+                <div class="buy-steps-grid">
+                    <div class="buy-step scroll-fade">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i data-lucide="wallet"></i>
+                            </div>
+                            <h3 class="step-title">GET SOLANA WALLET</h3>
+                            <p class="step-description">
+                                Download a Solana-compatible wallet like <strong>Phantom</strong>, <strong>Solflare</strong>, or <strong>Trust Wallet</strong>. 
+                                Create your wallet and securely store your seed phrase.
+                            </p>
+                            <div class="step-links">
+                                <a href="https://phantom.app" target="_blank" class="step-link">
+                                    <span>Phantom Wallet</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="https://solflare.com" target="_blank" class="step-link">
+                                    <span>Solflare Wallet</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="buy-step scroll-fade">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i data-lucide="coins"></i>
+                            </div>
+                            <h3 class="step-title">BUY SOLANA (SOL)</h3>
+                            <p class="step-description">
+                                Purchase SOL from exchanges like <strong>Coinbase</strong>, <strong>Binance</strong>, or <strong>Crypto.com</strong>. 
+                                You can also buy SOL directly in your wallet using on-ramp services.
+                            </p>
+                            <div class="step-links">
+                                <a href="https://coinbase.com" target="_blank" class="step-link">
+                                    <span>Coinbase</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="https://binance.com" target="_blank" class="step-link">
+                                    <span>Binance</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="buy-step scroll-fade">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i data-lucide="arrow-right-left"></i>
+                            </div>
+                            <h3 class="step-title">TRANSFER SOL</h3>
+                            <p class="step-description">
+                                Send your SOL from the exchange to your Solana wallet. Make sure to use the correct 
+                                <strong>Solana network</strong> address and always test with a small amount first.
+                            </p>
+                            <div class="step-warning">
+                                <i data-lucide="alert-triangle"></i>
+                                <span>Always double-check wallet addresses before sending!</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="buy-step scroll-fade">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i data-lucide="repeat"></i>
+                            </div>
+                            <h3 class="step-title">SWAP SOL FOR $CORE</h3>
+                            <p class="step-description">
+                                Visit <strong>Jupiter Exchange</strong> (jup.ag), connect your wallet, and swap your SOL for $CORE tokens. 
+                                Jupiter offers the best rates and lowest fees on Solana.
+                            </p>
+                            <div class="step-links">
+                                <a href="https://jup.ag/swap?sell=So11111111111111111111111111111111111111112&buy=4FdojUmXeaFMBG6yUaoufAC5Bz7u9AwnSAMizkx5pump" target="_blank" class="step-link buy-core-btn">
+                                    <span>BUY $CORE NOW</span>
+                                    <i data-lucide="external-link"></i>
+                                </a>
+                                <a href="#" onclick="copyContractAddress(); return false;" class="step-link copy-contract-btn">
+                                    <span>COPY CONTRACT</span>
+                                    <i data-lucide="copy"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buy-tips scroll-fade">
+                    <div class="tips-header">
+                        <i data-lucide="lightbulb"></i>
+                        <h3>PRO TIPS</h3>
+                    </div>
+                    <div class="tips-grid">
+                        <div class="tip-item">
+                            <i data-lucide="shield"></i>
+                            <span>Always verify the contract address before purchasing</span>
+                        </div>
+                        <div class="tip-item">
+                            <i data-lucide="clock"></i>
+                            <span>Consider transaction timing during high network activity</span>
+                        </div>
+                        <div class="tip-item">
+                            <i data-lucide="trending-up"></i>
+                            <span>Start with a small amount to test the process</span>
+                        </div>
+                        <div class="tip-item">
+                            <i data-lucide="lock"></i>
+                            <span>Never share your seed phrase with anyone</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roadmap Section -->
+        <section id="roadmap" class="roadmap-section scroll-fade">
+            <div class="stars-background"></div>
+            <div class="container">
+                <div class="section-header scroll-fade">
+                    <h2 class="section-title">ROADMAP</h2>
+                    <p class="section-subtitle">The journey to universal core adoption</p>
+                </div>
+                <div class="roadmap-timeline">
+                    <div class="timeline-item completed scroll-fade">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase I</div>
+                            <h3>SINGULARITY</h3>
+                            <p>Core is born. The signal spreads.<br>
+                            Mystic experts appear, drawn to the origin — calling others in.</p>
+                            <div class="timeline-status">COMPLETED</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item active scroll-fade">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase II</div>
+                            <h3>EXPANSION & ALIGNMENT</h3>
+                            <p>Form key alliances across platforms to reach those still searching for a token that mirrors the movement they love.<br>
+                            Refine the brand to reflect Core's true essence.<br>
+                            Begin locking in Core's identity and name rights across all fronts.<br>
+                            The community continues to grow — with new members being drawn to Core daily.</p>
+                            <div class="timeline-status">IN PROGRESS</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item scroll-fade">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Phase III</div>
+                            <h3>THE STANDARD</h3>
+                            <p>Core becomes synonymous with the trend itself.<br>
+                            Wider access through major listings.<br>
+                            Recognized by Murad's cult list.<br>
+                            The name is protected — and the mission, undeniable.</p>
+                            <div class="timeline-status">PLANNED</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer scroll-fade">
+    <div class="stars-background"></div>
+    <div class="container">
+            <div class="footer-content scroll-fade">
+                <div class="footer-left scroll-fade">
+                    <div class="footer-logo">
+                        <img src="blue core logo transparent.svg" alt="CORE Logo" class="footer-logo-img">
+                    </div>
+                    <p class="footer-description">
+                        The essence of everything, connecting all through blockchain technology.
+                    </p>
+                </div>
+                <div class="footer-right scroll-fade">
+                    <div class="footer-contract scroll-fade">
+                        <h4>Contract Address</h4>
+                        <div class="contract-address" onclick="copyContractAddress()">
+                            <span id="footer-contract">4FdojUmXeaFMBG6yUaoufAC5Bz7u9AwnSAMizkx5pump</span>
+                            <span class="copy-icon">⧉</span>
+                        </div>
+                    </div>
+                    <div class="footer-social scroll-fade">
+                        <div class="social-links">
+                        <a href="https://x.com/corecoreonsol" target="_blank" class="social-link" aria-label="Twitter">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="https://t.me/CoreCommunityPortal" target="_blank" class="social-link" aria-label="Telegram">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@corehcore" target="_blank" class="social-link" aria-label="TikTok">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.321 5.562a5.124 5.124 0 01-.443-.258 6.228 6.228 0 01-1.137-.966c-.849-.849-1.374-2.032-1.374-3.338h-2.289v14.554c0 .885-.335 1.691-.883 2.298-.548.608-1.295.953-2.117.953a3.344 3.344 0 01-3.344-3.344c0-1.848 1.496-3.344 3.344-3.344.348 0 .683.053 1 .154V9.742a6.205 6.205 0 00-1-.08c-3.422 0-6.199 2.777-6.199 6.199S7.656 22.06 11.078 22.06s6.199-2.777 6.199-6.199V9.098a8.987 8.987 0 005.043 1.541V7.786c-1.064 0-2.042-.417-2.757-1.096-.358-.34-.644-.748-.842-1.128z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="footer-bottom scroll-fade">
+                <p>&copy; 2025 CORE. All rights reserved. | The essence of everything.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="terminal.js"></script>
+    <script src="cursor.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
