@@ -103,6 +103,42 @@ body {
   text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none; /* Hide default cursor */
+}
+
+/* Force hide cursor on all elements */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
+/* Ensure cursor is hidden on interactive elements */
+a, button, input, textarea, select, [role="button"], [tabindex] {
+  cursor: none !important;
+}
+
+/* Additional cursor hiding for webkit browsers */
+::-webkit-any-link {
+  cursor: none !important;
+}
+
+/* Override any hover states that might show cursor */
+*:hover, *:focus, *:active {
+  cursor: none !important;
+}
+
+/* Specific overrides for common elements */
+a:hover, a:focus, a:active,
+button:hover, button:focus, button:active,
+input:hover, input:focus, input:active,
+textarea:hover, textarea:focus, textarea:active,
+select:hover, select:focus, select:active,
+[role="button"]:hover, [role="button"]:focus, [role="button"]:active {
+  cursor: none !important;
+}
+
+/* Override any CSS frameworks or libraries */
+.btn:hover, .button:hover, .link:hover {
+  cursor: none !important;
 }
 
 /* Selection Styles */
@@ -132,6 +168,120 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-accent-secondary);
+}
+
+/* ====================================================================
+   CUSTOM CURSOR
+   ==================================================================== */
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 2px solid var(--color-accent-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999; /* Increase z-index to be above everything */
+  transition: width 0.15s ease, height 0.15s ease, border-color 0.15s ease, background 0.15s ease; /* Faster transitions */
+  mix-blend-mode: difference;
+  will-change: transform; /* Optimize for animations */
+  transform: translate3d(0, 0, 0); /* Hardware acceleration */
+}
+
+.custom-cursor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--color-accent-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-cursor 2s ease-in-out infinite;
+}
+
+.custom-cursor.hover {
+  width: 40px;
+  height: 40px;
+  border-color: var(--color-accent-tertiary);
+  background: rgba(74, 144, 226, 0.1);
+  backdrop-filter: blur(5px);
+  transition: all 0.1s ease; /* Even faster hover transition */
+}
+
+.custom-cursor.click {
+  width: 16px;
+  height: 16px;
+  border-color: var(--color-accent-secondary);
+  transition: all 0.05s ease; /* Very fast click response */
+}
+
+.custom-cursor.text {
+  width: 2px;
+  height: 20px;
+  border-radius: 1px;
+  border-color: var(--color-accent-primary);
+  background: var(--color-accent-primary);
+}
+
+.custom-cursor.loading {
+  border-color: var(--color-accent-tertiary);
+  animation: rotate-cursor 1s linear infinite;
+}
+
+.custom-cursor.disabled {
+  border-color: var(--color-text-muted);
+  opacity: 0.5;
+}
+
+@keyframes pulse-cursor {
+  0%, 100% { 
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes rotate-cursor {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Hide cursor on mobile devices */
+@media (max-width: 768px) {
+  .custom-cursor {
+    display: none;
+  }
+  
+  body, *, *::before, *::after {
+    cursor: auto !important; /* Restore default cursor on mobile */
+  }
+  
+  a, button, input, textarea, select, [role="button"], [tabindex] {
+    cursor: pointer !important; /* Restore pointer cursor for interactive elements on mobile */
+  }
+}
+
+/* Also hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+  
+  a, button, [role="button"] {
+    cursor: pointer !important;
+  }
 }
 
 /* ====================================================================
@@ -217,23 +367,34 @@ body {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: var(--z-nav);
-  transition: transform var(--transition-normal);
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.3s ease;
+  transform: translateY(0);
 }
 
 .navbar.hidden {
   transform: translateY(-100%);
 }
 
+.navbar.scrolled {
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(25px);
+  border-bottom: 1px solid rgba(74, 144, 226, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
 .nav-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Wyśrodkowanie na desktopie */
   max-width: 1200px;
   margin: 0 auto;
   padding: var(--spacing-md) var(--spacing-xl);
+  position: relative;
 }
 
 .nav-logo {
+  position: absolute;
+  left: var(--spacing-xl);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -285,6 +446,49 @@ body {
 .nav-link:hover::after,
 .nav-link.active::after {
   width: 100%;
+}
+
+.nav-social {
+  position: absolute;
+  right: calc(var(--spacing-xl) + 60px); /* Miejsce na nav-toggle */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  color: var(--color-accent-primary);
+  transform: translateY(-2px);
+}
+
+.nav-toggle {
+  position: absolute;
+  right: var(--spacing-xl);
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  width: 30px;
+  height: 24px;
+  justify-content: space-between;
+}
+
+.nav-toggle span {
+  width: 100%;
+  height: 3px;
+  background: var(--color-text-primary);
+  transition: all var(--transition-normal);
+  border-radius: 2px;
 }
 
 .nav-status {
@@ -391,6 +595,24 @@ body {
   transform: translateY(0); /* No initial transform */
 }
 
+.typewriter-text {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+#typewriter-content {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid var(--color-accent-primary);
+  animation: blink-cursor 1s infinite;
+}
+
+@keyframes blink-cursor {
+  0%, 50% { border-color: var(--color-accent-primary); }
+  51%, 100% { border-color: transparent; }
+}
+
 .highlight {
   color: var(--color-accent-primary);
   font-weight: 600;
@@ -457,9 +679,10 @@ body {
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   position: relative;
   overflow: hidden;
+  transform: translateY(0);
 }
 
 .btn-primary {
@@ -469,8 +692,7 @@ body {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow), 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-glow), 0 15px 25px rgba(74, 144, 226, 0.4);
 }
 
 .btn-secondary {
@@ -480,9 +702,10 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(74, 144, 226, 0.1);
   border-color: var(--color-accent-primary);
   color: var(--color-accent-primary);
+  box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
 }
 
 .btn-arrow {
@@ -490,7 +713,7 @@ body {
 }
 
 .btn:hover .btn-arrow {
-  transform: translateX(3px);
+  transform: translateX(5px);
 }
 
 .scroll-indicator {
@@ -658,14 +881,7 @@ body {
   padding: var(--spacing-sm) 0;
   transform: translateZ(0); /* Force hardware acceleration */
   -webkit-appearance: none; /* Remove iOS styling */
-}
-
-.cursor {
-  width: 2px;
-  height: 1.2em;
-  background: var(--color-accent-primary);
-  margin-left: var(--spacing-sm);
-  animation: blink 1s ease-in-out infinite;
+  appearance: none;
 }
 
 /* ====================================================================
@@ -1244,15 +1460,11 @@ body {
   to { width: 100%; }
 }
 
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
 /* ====================================================================
-   REVEAL ANIMATIONS
+   REVEAL ANIMATIONS - ENHANCED SCROLL ANIMATIONS
    ==================================================================== */
 
+/* Legacy support for existing reveal elements */
 [data-reveal] {
   opacity: 0;
   transform: translateY(30px);
@@ -1264,6 +1476,58 @@ body {
   transform: translateY(0);
 }
 
+/* Enhanced scroll-based animations */
+[data-scroll-animation] {
+  transition: all var(--scroll-duration, 0.8s) var(--scroll-easing, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+  will-change: opacity, transform;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed navbar */
+}
+
+/* Enhanced scrolling performance */
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations for animations */
+.scroll-parallax,
+.scroll-fade,
+.scroll-scale,
+.scroll-blur {
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Enhanced hero parallax */
+.hero-background {
+  will-change: transform;
+  transform: translate3d(0, 0, 0); /* Force hardware acceleration */
+}
+
+/* Smooth custom cursor integration */
+.custom-cursor {
+  transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger animation containers */
+[data-scroll-stagger] {
+  position: relative;
+}
+
+[data-scroll-stagger] > * {
+  transition-delay: calc(var(--stagger-index, 0) * var(--stagger-delay, 100ms));
+}
+
 /* ====================================================================
    RESPONSIVE DESIGN
    ==================================================================== */
@@ -1271,6 +1535,15 @@ body {
 @media (max-width: 1024px) {
   .nav-container {
     padding: var(--spacing-md) var(--spacing-lg);
+    justify-content: space-between; /* Na tablecie wracamy do space-between */
+  }
+  
+  .nav-logo {
+    position: static; /* Na tablecie logo wraca do normalnego flow */
+  }
+  
+  .nav-social {
+    display: none; /* Ukryj social icons na tablecie */
   }
   
   .hero-content {
@@ -1283,6 +1556,7 @@ body {
   
   .timeline-item {
     flex-direction: column !important;
+    padding-left: var(--spacing-xl);
   }
   
   .timeline-content {
@@ -1291,11 +1565,13 @@ body {
   }
   
   .roadmap-timeline::before {
-    left: 20px;
+    left: 15px;
+    transform: none;
   }
   
   .timeline-marker {
-    left: 20px !important;
+    left: 15px !important;
+    transform: translateX(-50%);
   }
 }
 
@@ -1307,71 +1583,96 @@ body {
     display: flex;
     align-items: flex-start; /* Align content to top */
     justify-content: center;
-    padding-top: 80px; /* Space for navbar */
+    padding-top: 70px; /* Reduced padding for navbar */
+    position: relative;
   }
   
   .hero-background {
-    background-position: center bottom; /* Show cat at bottom */
+    background-position: center center; /* Center the cat image */
     background-size: cover;
+    background-attachment: fixed; /* Keep background fixed on mobile */
   }
   
   .hero-content {
     position: relative;
     z-index: 2;
-    background: rgba(10, 10, 10, 0.7); /* Semi-transparent background */
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: var(--spacing-md);
-    margin: 20px var(--spacing-sm) auto var(--spacing-sm);
-    max-width: 90%;
+    background: rgba(10, 10, 10, 0.85); /* More transparent */
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: var(--spacing-sm); /* Much smaller padding */
+    margin: 10px var(--spacing-sm) auto var(--spacing-sm);
+    max-width: 95%;
     text-align: center;
+    transform: scale(0.8); /* Scale down the entire content box */
   }
   
-  /* Make hero text smaller on mobile */
+  /* Make hero text much smaller on mobile */
   .hero-text {
-    margin-bottom: var(--spacing-md);
-  }
-  
-  .hero-logo img {
-    height: 60px; /* Smaller logo */
     margin-bottom: var(--spacing-sm);
   }
   
+  .hero-logo img {
+    height: 40px; /* Much smaller logo */
+    margin-bottom: var(--spacing-xs);
+  }
+  
   .hero-subtitle {
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--spacing-md);
-    line-height: 1.4;
+    font-size: 0.8rem; /* Much smaller subtitle */
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
   }
   
   .hero-stats {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
   }
   
   .stat-item {
     padding: var(--spacing-xs);
+    background: rgba(255, 255, 255, 0.03); /* More transparent */
   }
   
   .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.6rem; /* Much smaller */
+    margin-bottom: 2px;
   }
   
   .stat-value {
-    font-size: 0.9rem;
+    font-size: 0.75rem; /* Much smaller */
   }
   
   .hero-actions {
     flex-direction: column;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
     align-items: center;
   }
   
   .btn {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm); /* Much smaller buttons */
+    font-size: 0.75rem;
     width: 100%;
-    max-width: 250px;
+    max-width: 180px;
+    height: 35px; /* Fixed height */
+  }
+  
+  /* Mobile navbar styles */
+  .nav-container {
+    justify-content: space-between !important; /* Force space-between na mobile */
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+  
+  .nav-logo {
+    position: static !important; /* Force static positioning na mobile */
+  }
+  
+  .nav-social {
+    display: none !important; /* Hide social icons na mobile */
+  }
+  
+  .nav-toggle {
+    position: static !important; /* Static positioning na mobile */
+    display: flex;
   }
   
   /* Navigation styles */
@@ -1425,9 +1726,53 @@ body {
     grid-template-columns: 1fr;
   }
   
+  /* Footer mobile styles */
+  .footer {
+    padding: var(--spacing-xl) 0 var(--spacing-lg);
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+  
+  .footer-main {
+    order: 1;
+  }
+  
+  .footer-contract {
+    order: 2;
+  }
+  
+  .footer-social {
+    order: 3;
+  }
+  
+  .footer-logo img {
+    height: 3em !important;
+  }
+  
+  .footer-description {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .contract-address {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-sm);
+    word-break: break-all;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
   .footer-bottom {
     flex-direction: column;
     text-align: center;
+    font-size: var(--font-size-xs);
+    padding-top: var(--spacing-lg);
   }
   
   /* Mobile input stability fixes */
@@ -1459,15 +1804,45 @@ body {
     padding: 0 var(--spacing-md);
   }
   
+  .hero-section {
+    padding-top: 60px; /* Even less padding */
+  }
+  
   .hero-content {
-    margin-top: 100px; /* Even more margin for small screens */
-    padding: var(--spacing-md);
+    margin: 5px var(--spacing-xs) auto var(--spacing-xs);
+    padding: var(--spacing-xs); /* Minimal padding */
+    transform: scale(0.7); /* Scale down even more */
+    max-width: 98%;
   }
   
   .hero-title {
-    font-size: clamp(1.75rem, 8vw, 3rem);
-    line-height: 1.4;
-    margin-bottom: var(--spacing-lg);
+    font-size: clamp(1.2rem, 5vw, 2rem); /* Even smaller title */
+    line-height: 1.1;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .hero-subtitle {
+    font-size: 0.7rem; /* Tiny subtitle */
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .stat-item {
+    padding: 2px 4px; /* Minimal padding */
+  }
+  
+  .stat-label {
+    font-size: 0.5rem; /* Very small */
+  }
+  
+  .stat-value {
+    font-size: 0.65rem; /* Very small */
+  }
+  
+  .btn {
+    padding: 4px 8px; /* Minimal button padding */
+    font-size: 0.7rem;
+    height: 30px; /* Smaller buttons */
+    max-width: 150px;
   }
   
   .section-title {
@@ -1485,6 +1860,43 @@ body {
   
   .ascii-art pre {
     font-size: 8px;
+  }
+  
+  /* Very small screen footer adjustments */
+  .footer {
+    padding: var(--spacing-lg) 0 var(--spacing-md);
+  }
+  
+  .footer-logo img {
+    height: 2.5em !important;
+  }
+  
+  .footer-description {
+    font-size: 0.75rem;
+  }
+  
+  .contract-address {
+    font-size: 0.65rem;
+    padding: var(--spacing-xs);
+  }
+  
+  /* Very small screen roadmap adjustments */
+  .roadmap-timeline::before {
+    left: 10px;
+  }
+  
+  .timeline-marker {
+    left: 10px !important;
+    width: 12px;
+    height: 12px;
+  }
+  
+  .timeline-item {
+    padding-left: var(--spacing-lg);
+  }
+  
+  .timeline-content {
+    font-size: var(--font-size-sm);
   }
 }
 
@@ -1595,3 +2007,22 @@ body {
   }
 }
 
+/* ====================================================================
+   FORCE HIDE CURSOR - FINAL OVERRIDE
+   ==================================================================== */
+
+/* Final cursor override with maximum specificity */
+html *, html *:hover, html *:focus, html *:active,
+body *, body *:hover, body *:focus, body *:active {
+  cursor: none !important;
+}
+
+/* Ensure no element can override cursor */
+.nav-link, .nav-link:hover,
+.btn, .btn:hover, .btn:focus,
+.social-link, .social-link:hover,
+.control, .control:hover,
+a, a:hover, a:focus, a:active,
+button, button:hover, button:focus, button:active {
+  cursor: none !important;
+}
