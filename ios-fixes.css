@@ -6,19 +6,22 @@
 /* GENERAL MOBILE ROADMAP FIXES - ALL PHONES */
 @media only screen and (max-width: 768px) {
   
-  /* Hide CORE logo in mobile navigation and center social icons */
+  /* SIMPLE MOBILE NAVIGATION - HIDE LOGO, SHIFT ICONS LEFT */
   .nav-logo {
     display: none !important;
   }
   
+  .nav-menu {
+    display: none !important;
+  }
+  
   .nav-container {
-    justify-content: center !important;
-    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 20px !important;
   }
   
   .nav-social {
-    margin: 0 auto !important;
-    justify-content: center !important;
+    margin-left: 10px !important;
     display: flex !important;
     gap: 20px !important;
   }
@@ -212,19 +215,22 @@
 /* iPhone SE and small screens (320px - 414px) */
 @media only screen and (max-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
   
-  /* Enhanced mobile navigation for small screens */
+  /* Simple mobile navigation for small screens */
   .nav-logo {
     display: none !important;
   }
   
+  .nav-menu {
+    display: none !important;
+  }
+  
   .nav-container {
-    justify-content: center !important;
+    justify-content: flex-start !important;
     padding: 0 15px !important;
   }
   
   .nav-social {
-    margin: 0 auto !important;
-    justify-content: center !important;
+    margin-left: 10px !important;
     display: flex !important;
     gap: 15px !important;
   }
