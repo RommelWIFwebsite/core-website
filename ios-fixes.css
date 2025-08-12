@@ -3,6 +3,119 @@
    Critical fixes for iPhone SE (375px width) and similar devices
    ==================================================================== */
 
+/* GENERAL MOBILE ROADMAP FIXES - ALL PHONES */
+@media only screen and (max-width: 768px) {
+  
+  /* Hide CORE logo in mobile navigation and center social icons */
+  .nav-logo {
+    display: none !important;
+  }
+  
+  .nav-container {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .nav-social {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    display: flex !important;
+    gap: 20px !important;
+  }
+  
+  /* Fix roadmap section for ALL mobile devices */
+  .roadmap-section {
+    padding: 60px 15px !important;
+  }
+  
+  .roadmap-timeline {
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+  }
+  
+  .timeline-item {
+    display: block !important;
+    margin-bottom: 40px !important;
+    width: 100% !important;
+    position: relative !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
+  .timeline-content {
+    padding: 24px 20px !important;
+    margin: 0 !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px solid rgba(74, 144, 226, 0.4) !important;
+    border-radius: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .timeline-marker {
+    position: relative !important;
+    margin: 0 auto 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .timeline-line {
+    display: none !important;
+  }
+  
+  .timeline-title {
+    font-size: 1.4rem !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .timeline-description {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .timeline-features {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  
+  .feature-item {
+    font-size: 0.8rem !important;
+    padding: 4px 8px !important;
+  }
+  
+  .content-header {
+    margin-bottom: 16px !important;
+  }
+  
+  .phase-number {
+    font-size: 40px !important;
+  }
+  
+  /* Force all timeline items to be in a single column */
+  .timeline-item:nth-child(odd),
+  .timeline-item:nth-child(even) {
+    display: block !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+  }
+  
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}
+
 /* iPhone SE specific viewport fixes */
 @supports (-webkit-touch-callout: none) {
   /* Only target iOS devices */
@@ -98,6 +211,31 @@
 
 /* iPhone SE and small screens (320px - 414px) */
 @media only screen and (max-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
+  
+  /* Enhanced mobile navigation for small screens */
+  .nav-logo {
+    display: none !important;
+  }
+  
+  .nav-container {
+    justify-content: center !important;
+    padding: 0 15px !important;
+  }
+  
+  .nav-social {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    display: flex !important;
+    gap: 15px !important;
+  }
+  
+  .social-icon {
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
   
   /* Disable problematic typewriter text completely */
   .typewriter-text,
@@ -293,10 +431,19 @@
     padding: 3px 6px !important;
   }
 }
-}
 
 /* Ultra-specific iPhone SE (375px) fixes */
 @media only screen and (max-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+  
+  /* Ultra-compact navigation for iPhone SE */
+  .nav-social {
+    gap: 12px !important;
+  }
+  
+  .social-icon {
+    width: 36px !important;
+    height: 36px !important;
+  }
   
   .step-number {
     width: 45px !important;
