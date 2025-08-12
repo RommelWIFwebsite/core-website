@@ -452,6 +452,29 @@ body.core-loaded .navbar {
 
 /* Core Loader Mobile Optimization */
 @media (max-width: 768px) {
+  
+  /* MOBILE NAVIGATION - HIDE LOGO, CENTER SOCIAL ICONS */
+  .nav-logo {
+    display: none !important;
+  }
+  
+  .nav-container {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .nav-social {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    display: flex !important;
+    gap: 20px !important;
+  }
+  
+  .nav-menu {
+    display: none !important;
+  }
+  
+  /* CORE LOADER STYLES */
   .core-loader .hero-content {
     width: 90vw;
     max-width: 90vw;
@@ -5095,6 +5118,32 @@ section {
 
 @media (max-width: 480px) {
   /* Extra small screens - refined adjustments */
+  
+  /* MOBILE NAVIGATION FOR SMALL SCREENS */
+  .nav-logo {
+    display: none !important;
+  }
+  
+  .nav-container {
+    justify-content: center !important;
+    padding: 0 15px !important;
+  }
+  
+  .nav-social {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+  
+  .social-icon {
+    width: 38px !important;
+    height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* OTHER MOBILE FIXES */
   .hero-title {
     font-size: clamp(1.8rem, 7vw, 2.5rem) !important;
   }
@@ -5468,6 +5517,29 @@ section {
 
 /* ROADMAP MOBILE FIX */
 @media (max-width: 768px) {
+  
+  /* HIDE LOGO AND CENTER SOCIAL ICONS IN MOBILE NAVIGATION */
+  .nav-logo {
+    display: none !important;
+  }
+  
+  .nav-container {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .nav-social {
+    margin: 0 auto !important;
+    justify-content: center !important;
+    display: flex !important;
+    gap: 20px !important;
+  }
+  
+  .nav-menu {
+    display: none !important;
+  }
+  
+  /* ROADMAP FIXES */
   .roadmap-section {
     padding: 80px 15px !important;
   }
