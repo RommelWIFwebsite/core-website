@@ -1,0 +1,17 @@
+# GitHub Pages build files
+_site/
+
+# Node modules (if you add them later)
+node_modules/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
