@@ -5468,25 +5468,36 @@ section {
 
 /* ROADMAP MOBILE FIX */
 @media (max-width: 768px) {
+  .roadmap-section {
+    padding: 80px 15px !important;
+  }
+  
   .roadmap-timeline {
-    padding: 0 20px !important;
+    padding: 0 !important;
     display: block !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    overflow-x: visible !important;
   }
   
   .timeline-item {
     display: block !important;
     width: 100% !important;
-    margin-bottom: 30px !important;
+    margin-bottom: 40px !important;
     position: relative !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
   
   .timeline-content {
-    padding: 20px !important;
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 2px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 12px !important;
+    padding: 24px 20px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px solid rgba(74, 144, 226, 0.3) !important;
+    border-radius: 16px !important;
     width: 100% !important;
     box-sizing: border-box !important;
+    text-align: center !important;
+    margin: 0 !important;
   }
   
   .timeline-line {
@@ -5495,7 +5506,40 @@ section {
   
   .timeline-marker {
     position: relative !important;
-    margin-bottom: 15px !important;
+    margin: 0 auto 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .timeline-title {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .timeline-description {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .timeline-features {
+    justify-content: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .feature-item {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+  }
+  
+  .content-header {
+    margin-bottom: 16px !important;
+  }
+  
+  .phase-number {
+    font-size: 36px !important;
   }
 }
 
@@ -5656,25 +5700,36 @@ section {
 /* 4. FIX ROADMAP LAYOUT ON MOBILE */
 @media (max-width: 768px) {
   
+  .roadmap-section {
+    padding: 80px 15px !important;
+  }
+  
   .roadmap-timeline {
-    padding: 0 20px !important;
-    overflow-x: hidden !important;
+    padding: 0 !important;
+    overflow-x: visible !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
   
   .timeline-item {
     display: block !important;
-    margin-bottom: 50px !important;
+    margin-bottom: 40px !important;
     position: relative !important;
-    padding-left: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
   
   .timeline-content {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    border-radius: 20px !important;
-    padding: 30px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 2px solid rgba(74, 144, 226, 0.3) !important;
+    border-radius: 16px !important;
+    padding: 24px 20px !important;
     margin: 0 !important;
     backdrop-filter: blur(10px) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
   }
   
   .timeline-marker {
@@ -5682,9 +5737,39 @@ section {
     margin: 0 auto 20px !important;
     display: flex !important;
     justify-content: center !important;
+    align-items: center !important;
   }
   
   .timeline-line {
     display: none !important;
+  }
+  
+  .timeline-title {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .timeline-description {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .timeline-features {
+    justify-content: center !important;
+    gap: 8px !important;
+  }
+  
+  .feature-item {
+    font-size: 12px !important;
+    padding: 4px 8px !important;
+  }
+  
+  .content-header {
+    margin-bottom: 16px !important;
+  }
+  
+  .phase-number {
+    font-size: 36px !important;
   }
 }
